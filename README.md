@@ -1,6 +1,8 @@
 REACT-FINAL_PROJECT
 # TRIP ADVISOR APP
 
+[Click for live version](https://react-final-project-five.vercel.app/)
+
 That is gonna a trip advisor app that basicly consumes tripadviserAPI. This API provides a lot of (hotels, restaurants, attractions). MUST HAVE
 
 This app is also gonna consume google maps API (a library especially for react - @react-google-maps/api) Thanks to this API, All the trip advises can be shown on the map as well. MUST HAVE
