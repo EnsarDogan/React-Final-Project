@@ -1,4 +1,3 @@
-REACT-FINAL_PROJECT
 # TRIP ADVISOR APP
 
 [Click for live version](https://react-final-project-five.vercel.app/)
