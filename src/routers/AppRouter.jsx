@@ -3,15 +3,19 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import AdviseDetailsPage from "../pages/AdviseDetailsPage";
 
 import MainPage from "../pages/MainPage";
 
 const AppRouter = () => {
-    return <Router>
+    return (
+      <Router>
         <Routes>
-            <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/advise/:id" element={<AdviseDetailsPage />} />
         </Routes>
-    </Router>
+      </Router>
+    );
 }
 
 export default AppRouter;

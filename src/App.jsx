@@ -1,11 +1,14 @@
 import AppRouter from "./routers/AppRouter";
 import { CssBaseline } from "@mui/material";
+import { PlacesDataProvider } from "./context/PlacesDataContext";
 
 const App = () => {
   return (
-    <CssBaseline>
-      <AppRouter />
-    </CssBaseline>
+    <PlacesDataProvider>
+      <CssBaseline>
+        <AppRouter />
+      </CssBaseline>
+    </PlacesDataProvider>
   );
 };
 

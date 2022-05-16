@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { PlaceCard } from "../";
 
+
 const List = ({ places, isLoading, type, setType, rating, setRating }) => {
-  console.log("places", places);
   return (
     <div style={{ padding: "10px" }}>
       <Typography variant="h4">Food and Dining Around You</Typography>

@@ -3,6 +3,8 @@ import { Header, List, Map } from "../components";
 import { useState, useEffect } from "react";
 import { getPlacesData } from "../api";
 import { useLoadScript } from "@react-google-maps/api";
+import { useContext } from "react";
+import { PlacesDataContext } from "../context/PlacesDataContext";
 
 const libraries = ["places"];
 const MainPage = () => {
@@ -10,7 +12,7 @@ const MainPage = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-  const [places, setPlaces] = useState([]);
+  const { places, setPlaces } = useContext(PlacesDataContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {

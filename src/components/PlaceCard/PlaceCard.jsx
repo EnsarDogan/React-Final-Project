@@ -11,11 +11,16 @@ import {
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
+import { useNavigate } from "react-router-dom";
 const PlaceCard = ({ place }) => {
+  const navigate = useNavigate();
   const fakeImg =
     "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
   return (
-    <Card elevation={6}>
+    <Card
+      elevation={6}
+      onClick={(e) => navigate(`/advise/${place.location_id}`)}
+    >
       <CardMedia
         style={{ height: 350 }}
         image={place?.photo ? place.photo.images.large.url : fakeImg}

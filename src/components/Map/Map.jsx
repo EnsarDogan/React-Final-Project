@@ -2,11 +2,13 @@ import { useState, useCallback, memo } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { Paper, Rating, Typography, useEventCallback } from "@mui/material";
 
+
 const fakeImg =
   "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
 const mapContainerStyle = { width: "100%", height: "100%" };
 const coordinates = { lat: 41.0082, lng: 28.9784 };
 const options = { disableDefaultUI: true, zoomControl: true };
+
 const Map = ({ places }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
   return (
