@@ -20,7 +20,10 @@ The app may also consumes openweather API as the user can see the weather condit
 - material-ui (for styling)
 - material-ui-icons (for styling)
 - @react-google-maps/api
-- google-map-react
+    - Maps Javascript API
+    - Places API
+    - Geocoding API
+need to be activated
 - eslint
 - react-router-dom
 - context API

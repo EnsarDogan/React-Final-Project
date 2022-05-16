@@ -1,4 +1,4 @@
-export const getPlacesData = async (type) => {
+export const getPlacesData = async (type, bl, tr) => {
   const options = {
     method: "GET",
     headers: {
@@ -6,7 +6,7 @@ export const getPlacesData = async (type) => {
       "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_TRAVEL_API_KEY,
     },
   };
-  const URL = `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary?bl_latitude=39&tr_latitude=43&bl_longitude=26&tr_longitude=30`;
+  const URL = `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary?bl_latitude=${bl.lat}&tr_latitude=${tr.lat}&bl_longitude=${bl.lng}&tr_longitude=${tr.lng}`;
 
   try {
     const response = await fetch(URL, options);

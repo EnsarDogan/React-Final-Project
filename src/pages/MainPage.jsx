@@ -15,10 +15,17 @@ const MainPage = () => {
   const { places, setPlaces } = useContext(PlacesDataContext);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("restaurants");
+  const [rating, setRating] = useState(0);
+  const [coordinates, setCoordinates] = useState({});
+
   const getData = async () => {
     try {
       setIsLoading(true);
-      const response = await getPlacesData(type);
+      const response = await getPlacesData(
+        type,
+        { lat: coordinates.lat + 2, lng: coordinates.lng - 2 },
+        { lat: coordinates.lat - 2, lng: coordinates.lng + 2 }
+      );
       setPlaces(response?.data);
     } catch (error) {
       console.error(error);
@@ -28,12 +35,24 @@ const MainPage = () => {
   };
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords }) =>
+      setCoordinates({ lat: coords.latitude, lng: coords.longitude })
+    );
+  }, []);
+
+  useEffect(() => {
     getData();
-  }, [type]);
+  }, [type, coordinates]);
 
   return (
     <div style={{ height: "100vh" }}>
-      <Header style={{ height: "5%" }} />
+      {loadError ? (
+        "error"
+      ) : !isLoaded ? (
+        "loading..."
+      ) : (
+        <Header style={{ height: "5%" }} setCoordinates={setCoordinates} />
+      )}
       <Grid container style={{ height: "90%" }}>
         <Grid item xs={12} md={4}>
           <List
@@ -41,6 +60,8 @@ const MainPage = () => {
             isLoading={isLoading}
             setType={setType}
             type={type}
+            rating={rating}
+            setRating={setRating}
           />
         </Grid>
         <Grid item xs={12} md={8}>
@@ -49,7 +70,7 @@ const MainPage = () => {
           ) : !isLoaded ? (
             "loading..."
           ) : (
-            <Map places={places} />
+            <Map places={places} rating={rating} coordinates={coordinates} />
           )}
         </Grid>
       </Grid>

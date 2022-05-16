@@ -49,10 +49,10 @@ const List = ({ places, isLoading, type, setType, rating, setRating }) => {
               onChange={(e) => setRating(e.target.value)}
               label="Rating"
             >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="3">Above 3.0</MenuItem>
-              <MenuItem value="4">Above 4.0</MenuItem>
-              <MenuItem value="4.5">Above 4.5</MenuItem>
+              <MenuItem value={0}>All</MenuItem>
+              <MenuItem value={3}>Above 3.0</MenuItem>
+              <MenuItem value={4}>Above 4.0</MenuItem>
+              <MenuItem value={4.5}>Above 4.5</MenuItem>
             </Select>
           </FormControl>
           <Grid
@@ -61,11 +61,13 @@ const List = ({ places, isLoading, type, setType, rating, setRating }) => {
             style={{ height: "75vh", overflow: "auto" }}
           >
             {places &&
-              places?.map((place) => (
-                <Grid item xs={12}>
-                  <PlaceCard place={place} />
-                </Grid>
-              ))}
+              places
+                ?.filter((place) => Number(place?.rating) > rating)
+                .map((place) => (
+                  <Grid item xs={12}>
+                    <PlaceCard place={place} />
+                  </Grid>
+                ))}
           </Grid>
         </>
       )}
