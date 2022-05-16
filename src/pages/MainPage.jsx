@@ -14,11 +14,11 @@ const MainPage = () => {
   });
   const { places, setPlaces } = useContext(PlacesDataContext);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [type, setType] = useState("restaurants");
   const getData = async () => {
     try {
       setIsLoading(true);
-      const response = await getPlacesData();
+      const response = await getPlacesData(type);
       setPlaces(response?.data);
     } catch (error) {
       console.error(error);
@@ -29,14 +29,19 @@ const MainPage = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [type]);
 
   return (
     <div style={{ height: "100vh" }}>
       <Header style={{ height: "5%" }} />
       <Grid container style={{ height: "90%" }}>
         <Grid item xs={12} md={4}>
-          <List places={places} isLoading={isLoading} />
+          <List
+            places={places}
+            isLoading={isLoading}
+            setType={setType}
+            type={type}
+          />
         </Grid>
         <Grid item xs={12} md={8}>
           {loadError ? (
