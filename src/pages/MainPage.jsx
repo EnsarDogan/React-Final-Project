@@ -1,11 +1,9 @@
 import { Grid } from "@mui/material";
 import { Header, List, Map } from "../components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getPlacesData } from "../api";
 import { useLoadScript } from "@react-google-maps/api";
-import { useContext } from "react";
 import { PlacesDataContext } from "../context/PlacesDataContext";
-
 
 const libraries = ["places"];
 const MainPage = () => {
@@ -65,7 +63,7 @@ const MainPage = () => {
             setRating={setRating}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} style={{ width: "100%", height: "100%" }}>
           {loadError ? (
             "error"
           ) : !isLoaded ? (

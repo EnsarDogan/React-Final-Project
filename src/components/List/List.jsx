@@ -18,6 +18,8 @@ const List = ({
   rating,
   setRating,
 }) => {
+  // to be able to pass the clicked infoCard on List smoothly
+
   const [elementReferences, setElementReferences] = useState({});
   useEffect(() => {
     setElementReferences((prevReferences) =>
@@ -30,6 +32,7 @@ const List = ({
       }, {})
     );
   }, [places]);
+
   return (
     <div style={{ padding: "10px" }}>
       <Typography variant="h4">Food and Dining Around You</Typography>
@@ -79,21 +82,22 @@ const List = ({
             spacing={3}
             style={{ height: "75vh", overflow: "auto" }}
           >
-            {places &&
-              places
-                ?.filter((place) => Number(place?.rating) > rating)
-                .map((place) => (
-                  <Grid
-                    ref={elementReferences?.[place?.location_id]}
-                    item
-                    xs={12}
-                  >
-                    <PlaceCard
-                      place={place}
-                      reference={elementReferences?.[place?.location_id]}
-                    />
-                  </Grid>
-                ))}
+            {places
+              ?.filter((place) => Number(place?.rating) > rating)
+              .map((place) => (
+                <Grid
+                  item
+                  xs={12}
+                  // ref prop is used to be able to pass the clicked infoCard on List smoothly
+                  ref={elementReferences?.[place?.location_id]}
+                >
+                  <PlaceCard
+                    place={place}
+                    // reference prop is used to be able to pass the clicked infoCard on List smoothly
+                    reference={elementReferences?.[place?.location_id]}
+                  />
+                </Grid>
+              ))}
           </Grid>
         </>
       )}

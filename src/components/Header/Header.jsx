@@ -23,7 +23,7 @@ const Header = ({ setCoordinates }) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "block", sm: "block" } }}
           >
-            TRIP ADVISOR APP
+            Your Trip Advisor
           </Typography>
           <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
             <Search>

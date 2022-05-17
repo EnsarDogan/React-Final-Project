@@ -24,6 +24,9 @@ The app may also consumes openweather API as the user can see the weather condit
     - Places API
     - Geocoding API
 need to be activated
+- https://snazzymaps.com/
+(to be able to change the style of map)
+
 - eslint
 - react-router-dom
 - context API

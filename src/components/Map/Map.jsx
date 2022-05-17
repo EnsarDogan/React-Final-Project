@@ -1,26 +1,30 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useContext } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { Paper, Rating, Typography } from "@mui/material";
-import { useContext } from "react";
 import { InfoCardContext } from "../../context/InfoCardContext";
+import MapStyle from "./Map.style.js";
 
 const fakeImg =
   "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
 const mapContainerStyle = { width: "100%", height: "100%" };
-const options = { disableDefaultUI: true, zoomControl: true };
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+  //to be able to change the color of the map thanks to https://snazzymaps.com/
+  styles: MapStyle,
+};
 const Map = ({ places, rating, coordinates, setCoordinates }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const { infoCardClicked, setInfoCardClicked } = useContext(InfoCardContext);
-  const onMapDbClick = useCallback(
-    (event) => {
-      setCoordinates({
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      });
-    },
+  const { setInfoCardClicked } = useContext(InfoCardContext);
 
-    []
-  );
+  // to get the data according to the double clicked center on map
+  const onMapDbClick = (event) => {
+    setCoordinates({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+  };
+
   return (
     <div
       style={{
@@ -40,9 +44,8 @@ const Map = ({ places, rating, coordinates, setCoordinates }) => {
         {places?.length > 0
           ? places
               ?.filter((place) => Number(place?.rating) > rating)
-              .map((place, i) => (
+              .map((place) => (
                 <Marker
-                  key={i}
                   position={{
                     lat: Number(place?.latitude),
                     lng: Number(place?.longitude),
@@ -70,6 +73,7 @@ const Map = ({ places, rating, coordinates, setCoordinates }) => {
                 width: "200px",
                 cursor: "pointer",
               }}
+              //to be able to pass the clicked one smootly on List
               onDoubleClick={() =>
                 setInfoCardClicked(selectedMarker.location_id)
               }
@@ -99,4 +103,4 @@ const Map = ({ places, rating, coordinates, setCoordinates }) => {
   );
 };
 
-export default memo(Map);
+export default Map;

@@ -17,17 +17,20 @@ import { InfoCardContext } from "../../context/InfoCardContext";
 
 import "./placeCard.css";
 const PlaceCard = ({ place, reference }) => {
-  const { infoCardClicked, setInfoCardClicked } = useContext(InfoCardContext);
+  const { infoCardClicked } = useContext(InfoCardContext);
   const navigate = useNavigate();
   const fakeImg =
     "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
+
+  //to be able to pass the clicked one smootly on List
   if (infoCardClicked === place?.location_id) {
     reference?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
   return (
     <div className="cardContainer">
       <Card
-        elevation={6}
+        elevation={10}
         onClick={(e) => navigate(`/advise/${place.location_id}`)}
       >
         <CardMedia
@@ -41,12 +44,14 @@ const PlaceCard = ({ place, reference }) => {
           </Typography>
           <Box display="flex" justifyContent="space-between" my={1.5}>
             <Rating name="read-only" value={Number(place?.rating)} readOnly />
-            <Typography component="legend">
+            <Typography gutterBottom component="legend">
               {place?.num_reviews} review{place?.num_reviews > 1 ? "s" : ""}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between">
-            <Typography component="legend">Price</Typography>
+            <Typography gutterBottom component="legend">
+              Price
+            </Typography>
             <Typography gutterBottom variant="subtitle1">
               {place?.price_level}
             </Typography>
@@ -71,10 +76,10 @@ const PlaceCard = ({ place, reference }) => {
             </Box>
           ))}
           {place?.cuisine?.map(({ name }) => (
-            <Chip key={name} size="small" label={name} />
+            <Chip gutterBottom key={name} size="small" label={name} />
           ))}
           {place?.address ? (
-            <Typography gutterBottom variant="body2" color="textSecondary">
+            <Typography variant="body2" color="textSecondary">
               <LocationOnIcon />
               {place?.address}
             </Typography>
@@ -104,6 +109,6 @@ const PlaceCard = ({ place, reference }) => {
       </Card>
     </div>
   );
-};
+}
 
 export default PlaceCard;
