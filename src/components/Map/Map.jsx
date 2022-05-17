@@ -1,15 +1,30 @@
 import { useState, useCallback, memo } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
-import { Paper, Rating, Typography, useEventCallback } from "@mui/material";
-
+import { Paper, Rating, Typography } from "@mui/material";
 
 const fakeImg =
   "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
 const mapContainerStyle = { width: "100%", height: "100%" };
 const options = { disableDefaultUI: true, zoomControl: true };
 
-const Map = ({ places, rating, coordinates }) => {
+const Map = ({
+  places,
+  rating,
+  coordinates,
+  setInfoCardClicked,
+  setCoordinates,
+}) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const onMapDbClick = useCallback(
+    (event) => {
+      setCoordinates({
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      });
+    },
+
+    []
+  );
   return (
     <div
       style={{
@@ -22,11 +37,9 @@ const Map = ({ places, rating, coordinates }) => {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={coordinates}
-        zoom={10}
+        zoom={8}
         options={options}
-
-        // onClick={() => alert("yood")}
-        // onDblClick={() => alert("ooooo")}
+        onDblClick={onMapDbClick}
       >
         {places?.length > 0
           ? places
@@ -61,7 +74,9 @@ const Map = ({ places, rating, coordinates }) => {
                 width: "200px",
                 cursor: "pointer",
               }}
-              onDoubleClick={() => alert("iii")}
+              onDoubleClick={() =>
+                setInfoCardClicked(selectedMarker.location_id)
+              }
             >
               <Typography variant="subtitle2" gutterBottom>
                 {selectedMarker?.name}

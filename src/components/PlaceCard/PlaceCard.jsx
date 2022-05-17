@@ -12,10 +12,13 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { useNavigate } from "react-router-dom";
-const PlaceCard = ({ place }) => {
+const PlaceCard = ({ place, infoCardClicked, reference }) => {
   const navigate = useNavigate();
   const fakeImg =
     "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
+  if (infoCardClicked === place?.location_id) {
+    reference?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
   return (
     <Card
       elevation={6}

@@ -8,9 +8,29 @@ import {
   Select,
 } from "@mui/material";
 import { PlaceCard } from "../";
+import { useState, useEffect, createRef } from "react";
 
-
-const List = ({ places, isLoading, type, setType, rating, setRating }) => {
+const List = ({
+  places,
+  isLoading,
+  type,
+  setType,
+  rating,
+  setRating,
+  infoCardClicked,
+}) => {
+  const [elementReferences, setElementReferences] = useState({});
+  useEffect(() => {
+    setElementReferences((prevReferences) =>
+      places?.reduce((prev, place) => {
+        return {
+          ...prev,
+          [place?.location_id]:
+            prevReferences?.[places?.location_id] || createRef(),
+        };
+      }, {})
+    );
+  }, [places]);
   return (
     <div style={{ padding: "10px" }}>
       <Typography variant="h4">Food and Dining Around You</Typography>
@@ -64,8 +84,16 @@ const List = ({ places, isLoading, type, setType, rating, setRating }) => {
               places
                 ?.filter((place) => Number(place?.rating) > rating)
                 .map((place) => (
-                  <Grid item xs={12}>
-                    <PlaceCard place={place} />
+                  <Grid
+                    ref={elementReferences?.[place?.location_id]}
+                    item
+                    xs={12}
+                  >
+                    <PlaceCard
+                      infoCardClicked={infoCardClicked}
+                      place={place}
+                      reference={elementReferences?.[place?.location_id]}
+                    />
                   </Grid>
                 ))}
           </Grid>

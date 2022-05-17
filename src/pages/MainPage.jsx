@@ -17,6 +17,7 @@ const MainPage = () => {
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState(0);
   const [coordinates, setCoordinates] = useState({});
+  const [infoCardClicked, setInfoCardClicked] = useState(null);
 
   const getData = async () => {
     try {
@@ -62,6 +63,7 @@ const MainPage = () => {
             type={type}
             rating={rating}
             setRating={setRating}
+            infoCardClicked={infoCardClicked}
           />
         </Grid>
         <Grid item xs={12} md={8}>
@@ -70,7 +72,13 @@ const MainPage = () => {
           ) : !isLoaded ? (
             "loading..."
           ) : (
-            <Map places={places} rating={rating} coordinates={coordinates} />
+            <Map
+              places={places}
+              rating={rating}
+              coordinates={coordinates}
+              setInfoCardClicked={setInfoCardClicked}
+              setCoordinates={setCoordinates}
+            />
           )}
         </Grid>
       </Grid>
