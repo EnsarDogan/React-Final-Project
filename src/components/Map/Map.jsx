@@ -1,20 +1,16 @@
 import { useState, useCallback, memo } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { Paper, Rating, Typography } from "@mui/material";
+import { useContext } from "react";
+import { InfoCardContext } from "../../context/InfoCardContext";
 
 const fakeImg =
   "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
 const mapContainerStyle = { width: "100%", height: "100%" };
 const options = { disableDefaultUI: true, zoomControl: true };
-
-const Map = ({
-  places,
-  rating,
-  coordinates,
-  setInfoCardClicked,
-  setCoordinates,
-}) => {
+const Map = ({ places, rating, coordinates, setCoordinates }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const { infoCardClicked, setInfoCardClicked } = useContext(InfoCardContext);
   const onMapDbClick = useCallback(
     (event) => {
       setCoordinates({

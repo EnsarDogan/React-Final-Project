@@ -12,8 +12,12 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { InfoCardContext } from "../../context/InfoCardContext";
+
 import "./placeCard.css";
-const PlaceCard = ({ place, infoCardClicked, reference }) => {
+const PlaceCard = ({ place, reference }) => {
+  const { infoCardClicked, setInfoCardClicked } = useContext(InfoCardContext);
   const navigate = useNavigate();
   const fakeImg =
     "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";

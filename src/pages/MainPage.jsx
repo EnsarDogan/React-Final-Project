@@ -6,6 +6,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import { useContext } from "react";
 import { PlacesDataContext } from "../context/PlacesDataContext";
 
+
 const libraries = ["places"];
 const MainPage = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -17,7 +18,6 @@ const MainPage = () => {
   const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState(0);
   const [coordinates, setCoordinates] = useState({});
-  const [infoCardClicked, setInfoCardClicked] = useState(null);
 
   const getData = async () => {
     try {
@@ -63,7 +63,6 @@ const MainPage = () => {
             type={type}
             rating={rating}
             setRating={setRating}
-            infoCardClicked={infoCardClicked}
           />
         </Grid>
         <Grid item xs={12} md={8}>
@@ -76,7 +75,6 @@ const MainPage = () => {
               places={places}
               rating={rating}
               coordinates={coordinates}
-              setInfoCardClicked={setInfoCardClicked}
               setCoordinates={setCoordinates}
             />
           )}

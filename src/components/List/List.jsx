@@ -17,7 +17,6 @@ const List = ({
   setType,
   rating,
   setRating,
-  infoCardClicked,
 }) => {
   const [elementReferences, setElementReferences] = useState({});
   useEffect(() => {
@@ -90,7 +89,6 @@ const List = ({
                     xs={12}
                   >
                     <PlaceCard
-                      infoCardClicked={infoCardClicked}
                       place={place}
                       reference={elementReferences?.[place?.location_id]}
                     />
