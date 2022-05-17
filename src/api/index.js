@@ -11,6 +11,7 @@ export const getPlacesData = async (type, bl, tr) => {
   try {
     const response = await fetch(URL, options);
     const data = await response.json();
+    console.log({ data });
     return data;
   } catch (error) {
     console.error(error);
