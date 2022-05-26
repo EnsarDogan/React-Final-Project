@@ -1,6 +1,6 @@
 # TRIP ADVISOR APP
 
-[Click for live version](https://react-final-project-five.vercel.app/)
+[Click for live version](https://ensar-dogan-react-final-project.vercel.app/)
 
 That is gonna a trip advisor app that basicly consumes tripadviserAPI. This API provides a lot of (hotels, restaurants, attractions). MUST HAVE
 
